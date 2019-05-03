@@ -12,11 +12,12 @@ import matplotlib.widgets as widget
 D = 50 # diffusivity
 U = 0
 dt = 1
-dx = 100
+dx = 50
 
 x = np.arange(start=0, stop=1000, step=dx)
 z = np.zeros(x.shape)
-z[0:np.floor(x.shape/2)] = 100
+z[0:np.int(x.size/2)] = 100
+z_init = z
 
 
 D_min = 0
@@ -49,36 +50,45 @@ theline, = plt.plot(x, z, lw=1.5, color='green')
 # add slider
 widget_color = 'lightgoldenrodyellow'
 
-slide_D_ax = plt.axes([0.25, 0.25, 0.6, 0.05], facecolor=widget_color)
+slide_D_ax = plt.axes([0.2, 0.25, 0.4, 0.05], facecolor=widget_color)
 slide_D = widget.Slider(slide_D_ax, 'diffusivity', D_min, D_max, 
                                valinit=D, valstep=1, 
                                valfmt='%g', transform=ax.transAxes)
 
-slide_U_ax = plt.axes([0.25, 0.15, 0.6, 0.05], facecolor=widget_color)
-slide_U = widget.Slider(slide_U_ax, 'uplift at crest', U_min, U_max, 
+slide_U_ax = plt.axes([0.2, 0.15, 0.4, 0.05], facecolor=widget_color)
+slide_U = widget.Slider(slide_U_ax, 'uplift at\n crest', U_min, U_max, 
                                valinit=U, valstep=0.001, 
                                valfmt='%g', transform=ax.transAxes)
 
-slide_C_ax = plt.axes([0.25, 0.05, 0.6, 0.05], facecolor=widget_color)
-slide_C = widget.Slider(slide_C_ax, 'downcut at valley', C_min, C_max, 
+slide_C_ax = plt.axes([0.2, 0.05, 0.4, 0.05], facecolor=widget_color)
+slide_C = widget.Slider(slide_C_ax, 'downcut at\n valley', C_min, C_max, 
                                valinit=U, valstep=0.001, 
                                valfmt='%g', transform=ax.transAxes)
 
-# # DEFINE FUNCTIONS
-# def update(event):
-#
-#     # read values from the slider
-#     them = slide.val 
-#     # compute new y values
-#     they = (them * x) + b
-#     # update the plot
-#     theline.set_ydata(they)
-#     # redraw the canvas
-#     fig.canvas.draw_idle()
-#
-# # connect widgets
-# slide.on_changed(update)
+btn_hill_reset_ax = plt.axes([0.7, 0.2, 0.25, 0.04])
+btn_hill_reset = widget.Button(btn_hill_reset_ax, 'Reset hillslope', 
+                               color=widget_color, hovercolor='0.975')
 
+btn_slide_reset_ax = plt.axes([0.7, 0.1, 0.25, 0.04])
+btn_slide_reset = widget.Button(btn_slide_reset_ax, 'Reset sliders', 
+                               color=widget_color, hovercolor='0.975')
+
+# DEFINE FUNCTIONS
+def reset_hillslope(event):
+    z[:] = z_init[:]
+
+def reset_sliders(event):
+    slide_D.reset()
+    slide_U.reset()
+    slide_C.reset()
+    fig.canvas.draw_idle()
+
+# note that in this module, we have no update function, 
+#   because we will continually update the plot in a while loop
+
+
+btn_hill_reset.on_clicked(reset_hillslope)
+btn_slide_reset.on_clicked(reset_sliders)
 
 # show the results
 plt.show()
@@ -118,7 +128,9 @@ while plt.fignum_exists(1):
     # update elevation
     z = z + d_z
 
+    # update plot
     theline.set_ydata(z)
 
+    # take a quick pause and bookeeping
     plt.pause(0.001)
     cnt += 1
