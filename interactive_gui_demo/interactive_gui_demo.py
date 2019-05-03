@@ -14,7 +14,6 @@ b = 0
 x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 y = (m * x) + b
 
-
 mMax = 3
 mMin = 0
 
@@ -25,12 +24,11 @@ plt.rcParams['figure.figsize'] = 5, 7 # size of the figure in inches
 
 fig = plt.figure()
 ax = fig.add_subplot(1,1,1) # one row, one column, first plot
-plt.subplots_adjust(left=0.15, bottom=0.3, top=0.95, right=0.9) # where do we want the limits of the axes object
+fig.subplots_adjust(left=0.15, bottom=0.3, top=0.95, right=0.9) # where do we want the limits of the axes object
 
 # note that the above can also be done with just the following plt.subplots() example:
 # fig, ax = plt.subplots() # gives us a figure object and axes object to manipulate and plot things into
-# plt.subplots_adjust(left=0.15, bottom=0.3, top=0.95, right=0.9) # where do we want the limits of the axes object
-
+# fig.subplots_adjust(left=0.15, bottom=0.3, top=0.95, right=0.9) # where do we want the limits of the axes object
 
 fig.canvas.set_window_title('demo') # title of the figure window
 ax.set_xlabel("x") # the axis xlabel
