@@ -2,49 +2,60 @@
 # The module is written and executed in Python
 
 
-# IMPORT LIBLARIES
+# import liblaries
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.widgets as widget
 
 
-# SET PARAMETERS
+# parameters
 D = 50 # diffusivity
 U = 0
 dt = 1
 dx = 50
 
+
+# set up the x and z arrays for the hillslope
 x = np.arange(start=0, stop=1000, step=dx)
 z = np.zeros(x.shape)
 z[0:np.int(x.size/2)] = 100
 z_init = z
 
 
+# limits for the sliders
 D_min = 0
-D_max = 1000
-U_max = 0.2
+D_max = 500
+U_max = 0.4
 U_min = 0
-C_max = 0.2
+C_max = 0.4
 C_min = 0
 
 
 # setup the figure
 plt.rcParams['toolbar'] = 'None' # turn off the matplotlib toolbar in the figure
 plt.rcParams['figure.figsize'] = 5, 7 # size of the figure in inches
-plt.ion()
+
 
 fig, ax = plt.subplots() # gives us a figure object and axes object to manipulate and plot things into
-plt.subplots_adjust(left=0.2, bottom=0.4, top=0.95, right=0.9) # where do we want the limits of the axes object
+fig.subplots_adjust(left=0.2, bottom=0.4, top=0.95, right=0.9) # where do we want the limits of the axes object
 
 fig.canvas.set_window_title('Hillslope model') # title of the figure window
 
 ax.set_xlabel("x-distance") # the axis xlabel
 ax.set_ylabel("elevation") # the axis ylabel
-plt.ylim(0, 200) # the axis y limits
+ax.set_ylim(0, 200) # the axis y limits
+ax.set_xlim(x.min(), x.max())
 
 
 # add plot elements
-theline, = plt.plot(x, z, lw=1.5, color='green')
+def xz_to_fill(x, z):
+    x_fill = np.hstack([x, np.flipud(x)])
+    z_fill = np.hstack([z, -np.ones(z.shape)])
+    return x_fill, z_fill
+
+# theline, = plt.plot(x, z, lw=1.5, color='green')
+x_fill, z_fill = xz_to_fill(x, z)
+theline, = ax.fill(x_fill, z_fill, facecolor='forestgreen', edgecolor='k')
 
 
 # add slider
@@ -73,7 +84,7 @@ btn_slide_reset_ax = plt.axes([0.7, 0.1, 0.25, 0.04])
 btn_slide_reset = widget.Button(btn_slide_reset_ax, 'Reset sliders', 
                                color=widget_color, hovercolor='0.975')
 
-# DEFINE FUNCTIONS
+# reset functions
 def reset_hillslope(event):
     z[:] = z_init[:]
 
@@ -91,13 +102,12 @@ btn_hill_reset.on_clicked(reset_hillslope)
 btn_slide_reset.on_clicked(reset_sliders)
 
 # show the results
-plt.show()
+plt.ion()
 
 # preallocate vectors for consistency in size
 sedflux_in = np.empty(x.shape, dtype=float)
 sedflux_out = np.empty(x.shape, dtype=float)
 
-cnt = 0
 while plt.fignum_exists(1):
 
     D = slide_D.val
@@ -129,8 +139,9 @@ while plt.fignum_exists(1):
     z = z + d_z
 
     # update plot
-    theline.set_ydata(z)
+    # theline.set_ydata(z)
+    x_fill, z_fill = xz_to_fill(x, z)
+    theline.set_xy(np.row_stack([x_fill, z_fill]).transpose())
 
     # take a quick pause and bookeeping
     plt.pause(0.001)
-    cnt += 1
