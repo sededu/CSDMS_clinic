@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.widgets as widget
 
+
 # SET PARAMETERS
 m = 1
 b = 0
@@ -30,8 +31,8 @@ plt.subplots_adjust(left=0.15, bottom=0.3, top=0.95, right=0.9) # where do we wa
 # fig, ax = plt.subplots() # gives us a figure object and axes object to manipulate and plot things into
 # plt.subplots_adjust(left=0.15, bottom=0.3, top=0.95, right=0.9) # where do we want the limits of the axes object
 
-fig.canvas.set_window_title('demo') # title of the figure window
 
+fig.canvas.set_window_title('demo') # title of the figure window
 ax.set_xlabel("x") # the axis xlabel
 ax.set_ylabel("y") # the axis ylabel
 plt.ylim(-1, 31) # the axis y limits
@@ -46,8 +47,9 @@ widget_color = 'lightgoldenrodyellow'
 
 slide_ax = plt.axes([0.2, 0.1, 0.6, 0.05], facecolor=widget_color)
 slide = widget.Slider(slide_ax, 'slope', mMin, mMax, 
-                               valinit=m, valstep=0.1, 
-                               valfmt='%g', transform=ax.transAxes)
+                      valinit=m, valstep=0.1, 
+                      valfmt='%g', transform=ax.transAxes)
+
 
 # DEFINE FUNCTIONS
 def update(event):
