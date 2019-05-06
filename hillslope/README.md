@@ -116,4 +116,56 @@ z = z + dz
 theline.set_ydata(z)
 ```
 
+That's the bulk of the change to make this an interactive geomorphology / sedimentology activity. 
+We can (and will) continue to add features to the module, but this hopefully gives you a sense of how things work.
 
+
+## Part 3 -- adding buttons and sliders
+ 
+The module we have developed thus far is nice, but we want to be able to teach students about more than just a diffusion-like morphology.
+Let's work on adding some more features. 
+
+__At this point, I encourage you to explore developing on your own; what feature would you like to see implemented?__
+
+I will walk through how to add two "reset" buttons now, and how to add additional sliders. I will set up my sliders to control the elevation change at the boundaries, but you could make your do anything else instead.
+
+### adding sliders
+First, let's make some space to add more sliders and some buttons.
+We need to adjust the layout of the subplots to do this.
+I'm also going to rename my slider to make it unambiguous which sliders are linked to which model controls.
+
+Shift the plot window up a bit, and the slider right edge to the left a bit:
+```python
+fig.subplots_adjust(left=0.2, bottom=0.4, top=0.95, right=0.9)
+```
+```python
+slide_D_ax = plt.axes([0.2, 0.25, 0.4, 0.05], facecolor=widget_color)
+slide_D = widget.Slider(slide_D_ax, 'diffusivity', D_min, D_max, 
+                               valinit=D, valstep=1, 
+                               valfmt='%g', transform=ax.transAxes)
+```
+(don't forget to also change the reference to the slider in the `while` loop!)
+
+Below I'm going to put the components I have used to make a slider which controls the uplift rate at the crest of the hillslope. Place them in the correct places in the code to make the slider work.
+
+```python
+slide_U_ax = plt.axes([0.2, 0.15, 0.4, 0.05], facecolor=widget_color)
+slide_U = widget.Slider(slide_U_ax, 'uplift at\n crest', U_min, U_max, 
+                               valinit=U, valstep=0.001, 
+                               valfmt='%g', transform=ax.transAxes) 
+```
+```python
+dz[0] = dz[0] + slide_U.val
+```
+```python
+U = 0
+U_max = 0.4
+U_min = 0
+```
+
+Try and add a slider which controls the downcutting rate at the downstream end. 
+How would you prevent the elevation from going below 0?
+
+You can see how I implemented this in `CSDMS_hillslope_module_part3.py`, but try it on your own!
+
+### adding reset buttons
