@@ -18,7 +18,7 @@ If this doesn't mean anything to you, that's fine, a `while` loop is a sequence 
 Our `while` loop will be based on the condition that the `Figure` object exists; so while the figure exists, we will continue to execute the code.
 At the end of the code, type or copy-paste the following.
 
-```
+```python
 while plt.fignum_exists(1):
 
     # read values from the slider
@@ -47,7 +47,7 @@ In this formulation, every loop we grab the value of the slider and do our calcu
 In this part, we will change our simple model of a sloping line, into a hillslope which evolves by a diffusion process.
 Change the name of the parameters to keep with the diffusion equation and a hillslope.
 
-```
+```python
 # parameters
 D = 50 # diffusivity
 dt = 1
@@ -64,8 +64,9 @@ z[0:np.int(x.size/2)] = 100
 D_min = 0
 D_max = 500
 ```
+
 We are also going to change the "window title", axis labels, and axis limits in this step.
-```
+```python
 fig.canvas.set_window_title('Hillslope model') # title of the figure window
 ax.set_xlabel("x-distance") # the axis xlabel
 ax.set_ylabel("elevation") # the axis ylabel
@@ -85,13 +86,34 @@ We're going to simulate hillslope evolution with a diffusion-like process, where
 As far as the module is concerned, we're not really changing anything here; the workflow is still to 1) read the slider value 2) do some computation with this value, and 3) update the plot.
 
 So let's fix the variable name we grab from the slider:
-```
+```python
 D = slide_D.val
 ```
 and then we will swap out the computation for our 1-sided diffusion-like process simulation:
 
+```python
+# calculate slope and sediment flux
+rise = z[0:-1] - z[1:]
+run = x[1:] - x[:-1]
+slope = rise / run
+q = slope * -D # q is some dimensionless sediment flux, based just on slope and diffusivity    
+sedflux_out[0:-1] = -q * dt
+
+# compute the sed flux into each cell
+sedflux_in[0] = 0
+sedflux_in[1:] = sedflux_out[:-1]
+
+# apply some boundary condition to define flux out of downstream cell
+sedflux_out[-1] = sedflux_out[-1] # zero-gradient boundary
+
+# compute the change in elevation per node
+dz = (sedflux_in - sedflux_out) / dx
+
+# update elevation
+z = z + dz
+
+# update the plot
+theline.set_ydata(z)
 ```
 
-
-```
 
