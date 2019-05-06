@@ -17,7 +17,6 @@ y = (m * x) + b
 mMax = 3
 mMin = 0
 
-
 # setup the figure
 plt.rcParams['toolbar'] = 'None' # turn off the matplotlib toolbar in the figure
 plt.rcParams['figure.figsize'] = 5, 7 # size of the figure in inches
@@ -43,12 +42,13 @@ slide = widget.Slider(slide_ax, 'slope', mMin, mMax,
                       valinit=m, valstep=0.1, 
                       valfmt='%g', transform=ax.transAxes)
 
+# show the results
+plt.ion()
 
-# DEFINE FUNCTIONS
-def update(event):
+while plt.fignum_exists(1):
 
     # read values from the slider
-    them = slide.val 
+    them = slide.val
 
     # compute new y values
     they = (them * x) + b
@@ -56,13 +56,4 @@ def update(event):
     # update the plot
     theline.set_ydata(they)
 
-    # redraw the canvas
-    fig.canvas.draw_idle()
-
-
-# connect widgets
-slide.on_changed(update)
-
-
-# show the results
-plt.show()
+    plt.pause(0.001)

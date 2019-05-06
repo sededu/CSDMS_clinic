@@ -2,7 +2,7 @@
 # The module is written and executed in Python
 
 
-# import liblaries
+# import libraries
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.widgets as widget
@@ -34,7 +34,6 @@ C_min = 0
 # setup the figure
 plt.rcParams['toolbar'] = 'None' # turn off the matplotlib toolbar in the figure
 plt.rcParams['figure.figsize'] = 5, 7 # size of the figure in inches
-
 
 fig, ax = plt.subplots() # gives us a figure object and axes object to manipulate and plot things into
 fig.subplots_adjust(left=0.2, bottom=0.4, top=0.95, right=0.9) # where do we want the limits of the axes object
@@ -124,19 +123,19 @@ while plt.fignum_exists(1):
     sedflux_in[1:] = sedflux_out[:-1]
 
     # apply some boundary condition to define flux out of downstream cell
-    # sedflux_out[-1] = sedflux_in[-1] # zero-gradient downstream boundary
-    sedflux_out[-1] = sedflux_out[-1] # zero-flux boundary?
+    sedflux_out[-1] = sedflux_out[-1] # zero-gradient boundary
 
-    d_z = (sedflux_in - sedflux_out) / dx
+    # compute the change in elevation per node
+    dz = (sedflux_in - sedflux_out) / dx
 
     # apply boundary conditions
-    d_z[0] = d_z[0] + slide_U.val
-    d_z[-1] = d_z[-1] + -slide_C.val
-    if z[-1] + d_z[-1] < 0:
-        d_z[-1] = 0
+    dz[0] = dz[0] + slide_U.val
+    dz[-1] = dz[-1] + -slide_C.val
+    if z[-1] + dz[-1] < 0:
+        dz[-1] = 0
 
     # update elevation
-    z = z + d_z
+    z = z + dz
 
     # update plot
     # theline.set_ydata(z)
