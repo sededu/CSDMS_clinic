@@ -169,3 +169,28 @@ How would you prevent the elevation from going below 0?
 You can see how I implemented this in `CSDMS_hillslope_module_part3.py`, but try it on your own!
 
 ### adding reset buttons
+
+The process for creating a button is _very_ similar to the process we used to connect a slider in the previous tutorial with the sloping line.
+Let's first make a button that resets the sliders to their initial values.
+This uses the `Button` class from `matplotlib`:
+```python
+btn_slide_reset_ax = plt.axes([0.7, 0.1, 0.25, 0.04])
+btn_slide_reset = widget.Button(btn_slide_reset_ax, 'Reset sliders', 
+                               color=widget_color, hovercolor='0.975')
+```
+
+Now we need a function to execute each time out button is pushed:
+```python
+# reset functions
+def reset_sliders(event):
+    slide_D.reset()
+    slide_U.reset()
+    slide_C.reset()
+    fig.canvas.draw_idle()
+```
+(be sure the names of the sliders in the reset function match the slider names in your code!)
+
+And finally, we need to connect the button to the function 
+```python
+btn_slide_reset.on_clicked(reset_sliders)
+```

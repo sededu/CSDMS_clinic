@@ -66,6 +66,19 @@ slide_C = widget.Slider(slide_C_ax, 'downcut at\n valley', C_min, C_max,
                                valinit=U, valstep=0.001, 
                                valfmt='%g', transform=ax.transAxes)
 
+btn_slide_reset_ax = plt.axes([0.7, 0.1, 0.25, 0.04])
+btn_slide_reset = widget.Button(btn_slide_reset_ax, 'Reset sliders', 
+                               color=widget_color, hovercolor='0.975')
+
+# reset functions
+def reset_sliders(event):
+    slide_D.reset()
+    slide_U.reset()
+    slide_C.reset()
+    fig.canvas.draw_idle() 
+
+btn_slide_reset.on_clicked(reset_sliders)
+
 # show the results
 plt.ion()
 
