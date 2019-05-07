@@ -59,12 +59,12 @@ slide_D = widget.Slider(slide_D_ax, 'diffusivity', D_min, D_max,
 
 slide_U_ax = plt.axes([0.2, 0.15, 0.4, 0.05], facecolor=widget_color)
 slide_U = widget.Slider(slide_U_ax, 'uplift at\n crest', U_min, U_max, 
-                               valinit=U, valstep=0.001, 
+                               valinit=U, valstep=0.05, 
                                valfmt='%g', transform=ax.transAxes)
 
 slide_C_ax = plt.axes([0.2, 0.05, 0.4, 0.05], facecolor=widget_color)
 slide_C = widget.Slider(slide_C_ax, 'downcut at\n valley', C_min, C_max, 
-                               valinit=U, valstep=0.001, 
+                               valinit=U, valstep=0.05, 
                                valfmt='%g', transform=ax.transAxes)
 
 btn_hill_reset_ax = plt.axes([0.7, 0.2, 0.25, 0.04])

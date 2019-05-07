@@ -151,7 +151,7 @@ Below I'm going to put the components I have used to make a slider which control
 ```python
 slide_U_ax = plt.axes([0.2, 0.15, 0.4, 0.05], facecolor=widget_color)
 slide_U = widget.Slider(slide_U_ax, 'uplift at\n crest', U_min, U_max, 
-                               valinit=U, valstep=0.001, 
+                               valinit=U, valstep=0.05, 
                                valfmt='%g', transform=ax.transAxes) 
 ```
 ```python
@@ -206,18 +206,33 @@ That wraps up the mechanics of the module!
 What follows will be a few tricks on making your module a little more visually appealing.
 In my experience, these final steps in polishing the presentation really make a difference in student comprehension--it pays for your module to _look like_ the thing you are emulating.
 
-To do this, we'll add a sky background, and make the hillslope green.
-Finally, we'll add a meter for the rate of change of elevation at the crest.
+To do this, we'll add a sky background and make the hillslope green.
+Finally, we'll add a display for the rate of change of elevation at the crest.
 
+A helpful tool in these modules is to use polygons, rather than just lines. 
+It's pretty easy to convert a line into a polygon, using the line as the "boundary" of the polygon, and the other points being "off screen".
+`matplotlib` provides a plotting method called `fill()`; the man-page for `fill` tells us to provide input data as `fill(x, y, **kwargs)`, where `x` and `y` are lists of points to be used to bound the polygon.
+We will use our hillslope line as one side of the polygon, and the other side will simply be a series of points outside of the limits of the plot.
 
-
-
-
-
-
-
-
-
+So, let 
+```python
+x_fill = np.hstack([x, np.flipud(x)])
+```
+which is simply the `x`-vector, followed by the `x`-vector flipped backwards.
+Now, we want to plot this against the `z`-vector, followed by a bunch of `z`-value off the plot limits.
+```python
+z_fill = np.hstack([z, -np.ones(z.shape)])
+```
+which is combined with some plotting arguments to produce the hillslope:
+```python
+thehill, = ax.fill(x_fill, z_fill, facecolor='forestgreen', edgecolor='k')
+```
+Note that `fill()` returns an _instance_ of the _class_ `Polygon`, instead of the `Line2D` object that was returned from `plot()`.
+We need to change the method we use to update the plot during the `while` loop now though:
+```python
+thehill.set_xy(np.row_stack([x_fill, z_fill]).transpose())
+```
+See the [man-page for `Polygon` and `set_xy()`](https://matplotlib.org/api/_as_gen/matplotlib.patches.Polygon.html#matplotlib.patches.Polygon.set_xy) for full information.
 
 
 ## Part 5 -- some notes

@@ -62,9 +62,9 @@ thesky, = ax.fill(np.array([-1, -1, x.max(), x.max()]),
                   np.array([-1, 250, 250, -1]), facecolor='aliceblue', edgecolor='none')
 # theline, = plt.plot(x, z, lw=1.5, color='green')
 x_fill, z_fill = xz_to_fill(x, z)
-theline, = ax.fill(x_fill, z_fill, facecolor='forestgreen', edgecolor='k')
+thehill, = ax.fill(x_fill, z_fill, facecolor='forestgreen', edgecolor='k')
 
-thetext = ax.text(0.1, 0.1, 'dz/dt = {0}'.format(dzdt), transform=ax.transAxes)
+thetext = ax.text(0.05, 0.05, '$dz/dt_{x=0}$' + '= {:.2f}'.format(dzdt), transform=ax.transAxes)
 
 # add slider
 widget_color = 'lightgoldenrodyellow'
@@ -76,12 +76,12 @@ slide_D = widget.Slider(slide_D_ax, 'diffusivity', D_min, D_max,
 
 slide_U_ax = plt.axes([0.2, 0.15, 0.4, 0.05], facecolor=widget_color)
 slide_U = widget.Slider(slide_U_ax, 'uplift at\n crest', U_min, U_max, 
-                               valinit=U, valstep=0.001, 
+                               valinit=U, valstep=0.05, 
                                valfmt='%g', transform=ax.transAxes)
 
 slide_C_ax = plt.axes([0.2, 0.05, 0.4, 0.05], facecolor=widget_color)
 slide_C = widget.Slider(slide_C_ax, 'downcut at\n valley', C_min, C_max, 
-                               valinit=U, valstep=0.001, 
+                               valinit=U, valstep=0.05, 
                                valfmt='%g', transform=ax.transAxes)
 
 btn_hill_reset_ax = plt.axes([0.7, 0.2, 0.25, 0.04])
@@ -91,6 +91,7 @@ btn_hill_reset = widget.Button(btn_hill_reset_ax, 'Reset hillslope',
 btn_slide_reset_ax = plt.axes([0.7, 0.1, 0.25, 0.04])
 btn_slide_reset = widget.Button(btn_slide_reset_ax, 'Reset sliders', 
                                color=widget_color, hovercolor='0.975')
+
 
 # reset functions
 def reset_hillslope(event):
@@ -150,8 +151,8 @@ while plt.fignum_exists(1):
     # update plot
     # theline.set_ydata(z)
     x_fill, z_fill = xz_to_fill(x, z)
-    theline.set_xy(np.row_stack([x_fill, z_fill]).transpose())
-    thetext.set_text('dz/dt = {:.2f}'.format(dzdt))
+    thehill.set_xy(np.row_stack([x_fill, z_fill]).transpose())
+    thetext.set_text('$dz/dt_{x=0}$' + '= {:.2f}'.format(dzdt))
 
     # take a quick pause and bookeeping
     plt.pause(0.001)
