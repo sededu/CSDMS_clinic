@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import matplotlib.widgets as widget
 import matplotlib.animation as animation
 
-# add plot elements
+# convenience function
 def xz_to_fill(x, z):
     """
     this simple function provides a convenient way to calculate the polygon
@@ -17,6 +17,7 @@ def xz_to_fill(x, z):
     x_fill = np.hstack([x, np.flipud(x)])
     z_fill = np.hstack([z, -np.ones(z.shape)])
     return x_fill, z_fill
+
 
 class GUI(object):
     def __init__(self, hill):
@@ -39,13 +40,12 @@ class GUI(object):
 
         self.thesky, = self.ax.fill(np.array([-1, -1, hill.x.max(), hill.x.max()]),
                   np.array([-1, 250, 250, -1]), facecolor='aliceblue', edgecolor='none')
-        # theline, = plt.plot(x, z, lw=1.5, color='green')
         x_fill, z_fill = xz_to_fill(hill.x, hill.z)
         self.thehill, = self.ax.fill(x_fill, z_fill, facecolor='forestgreen', edgecolor='k')
 
         self.thetext = self.ax.text(0.05, 0.05, '$dz/dt_{x=0}$' + '= {:.2f}'.format(hill.dzdt), transform=self.ax.transAxes)
 
-        # add slider
+        # add sliders
         widget_color = 'lightgoldenrodyellow'
 
         self.slide_D_ax = plt.axes([0.2, 0.25, 0.4, 0.05], facecolor=widget_color)
@@ -63,34 +63,26 @@ class GUI(object):
                                        valinit=hill.U, valstep=0.05, 
                                        valfmt='%g', transform=self.ax.transAxes)
 
-        # btn_hill_reset_ax = plt.axes([0.7, 0.2, 0.25, 0.04])
-        # btn_hill_reset = widget.Button(btn_hill_reset_ax, 'Reset hillslope', 
-        #                                color=widget_color, hovercolor='0.975')
+        self.btn_hill_reset_ax = plt.axes([0.7, 0.2, 0.25, 0.04])
+        self.btn_hill_reset = widget.Button(self.btn_hill_reset_ax, 'Reset hillslope', 
+                                       color=widget_color, hovercolor='0.975')
 
-        # btn_slide_reset_ax = plt.axes([0.7, 0.1, 0.25, 0.04])
-        # btn_slide_reset = widget.Button(btn_slide_reset_ax, 'Reset sliders', 
-        #                                color=widget_color, hovercolor='0.975')
+        self.btn_slide_reset_ax = plt.axes([0.7, 0.1, 0.25, 0.04])
+        self.btn_slide_reset = widget.Button(self.btn_slide_reset_ax, 'Reset sliders', 
+                                       color=widget_color, hovercolor='0.975')
 
+        self.btn_hill_reset.on_clicked(self.reset_hillslope)
+        self.btn_slide_reset.on_clicked(self.reset_sliders)
 
-        # btn_hill_reset.on_clicked(reset_hillslope)
-        # btn_slide_reset.on_clicked(reset_sliders)
+    # reset functions
+    def reset_hillslope(self, event):
+        self.hill.z[:] = self.hill.z_init[:]
 
-        # show the results
-        # plt.ion()
-
-
-# reset functions
-def reset_hillslope(event):
-    z[:] = z_init[:]
-
-def reset_sliders(event):
-    slide_D.reset()
-    slide_U.reset()
-    slide_C.reset()
-    fig.canvas.draw_idle()
-
-# note that in this module, we have no update function, 
-#   because we will continually update the plot in a while loop
+    def reset_sliders(self, event):
+        self.slide_D.reset()
+        self.slide_U.reset()
+        self.slide_C.reset()
+        self.fig.canvas.draw_idle()
 
 
 class Hill(object):
@@ -160,11 +152,6 @@ class Hill(object):
         self.thehill.set_xy(np.row_stack([x_fill, z_fill]).transpose())
         self.thetext.set_text('$dz/dt_{x=0}$' + '= {:.2f}'.format(dzdt))
 
-        # take a quick pause and bookeeping
-        # plt.pause(0.001)
-        # we now handle this pause with the "interval" defined in FuncAnimation
-
-        return self.thehill
 
 class Runner(object):
     def __init__(self):
@@ -179,6 +166,7 @@ class Runner(object):
         hill.slide_C = gui.slide_C
         hill.thehill = gui.thehill
         hill.thetext = gui.thetext
+        hill.thesky = gui.thesky
 
         anim = animation.FuncAnimation(gui.fig, hill, 
                                        interval=10, blit=False,
