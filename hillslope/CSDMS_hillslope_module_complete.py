@@ -20,14 +20,15 @@ x = np.arange(start=0, stop=1000, step=dx)
 z = np.zeros(x.shape)
 z[0:np.int(x.size/2)] = 100
 z_init = z
+dzdt = 0
 
 
 # limits for the sliders
 D_min = 0
 D_max = 500
-U_max = 0.4
+U_max = 1
 U_min = 0
-C_max = 0.4
+C_max = 1
 C_min = 0
 
 
@@ -58,11 +59,12 @@ def xz_to_fill(x, z):
 
 
 thesky, = ax.fill(np.array([-1, -1, x.max(), x.max()]),
-                  np.array([-1, 250, 250, -1]), facecolor='skyblue', edgecolor='none')
+                  np.array([-1, 250, 250, -1]), facecolor='aliceblue', edgecolor='none')
 # theline, = plt.plot(x, z, lw=1.5, color='green')
 x_fill, z_fill = xz_to_fill(x, z)
 theline, = ax.fill(x_fill, z_fill, facecolor='forestgreen', edgecolor='k')
 
+thetext = ax.text(0.1, 0.1, 'dz/dt = {0}'.format(dzdt), transform=ax.transAxes)
 
 # add slider
 widget_color = 'lightgoldenrodyellow'
@@ -143,11 +145,13 @@ while plt.fignum_exists(1):
 
     # update elevation
     z = z + dz
+    dzdt = dz[0]
 
     # update plot
     # theline.set_ydata(z)
     x_fill, z_fill = xz_to_fill(x, z)
     theline.set_xy(np.row_stack([x_fill, z_fill]).transpose())
+    thetext.set_text('dz/dt = {:.2f}'.format(dzdt))
 
     # take a quick pause and bookeeping
     plt.pause(0.001)

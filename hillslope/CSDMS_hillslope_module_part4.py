@@ -25,9 +25,9 @@ z_init = z
 # limits for the sliders
 D_min = 0
 D_max = 500
-U_max = 0.4
+U_max = 1
 U_min = 0
-C_max = 0.4
+C_max = 1
 C_min = 0
 
 
