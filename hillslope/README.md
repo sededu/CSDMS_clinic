@@ -234,6 +234,14 @@ thehill.set_xy(np.row_stack([x_fill, z_fill]).transpose())
 ```
 See the [man-page for `Polygon` and `set_xy()`](https://matplotlib.org/api/_as_gen/matplotlib.patches.Polygon.html#matplotlib.patches.Polygon.set_xy) for full information.
 
+Try and add a sky-colored background to the plot, just to push the effect of the hillslope a little farther. 
+Hint: choose four points that are just outside the limits of the plot. You also don't need to update this object at all!
+You can see my implementation in the `CSDMS_hillslope_module_part4.py` file.
+
+Another step you can take is to wrap the conversion of the `x` and `z` vectors into a function.
+If the function is declared early in the script, then you can use it to make the initial plot, and update the plot.
+You can see my implementation in the `CSDMS_hillslope_module_part4.py` file.
+
 
 ## Part 5 -- some notes
 This tutorial does not explain a few important parts of getting your module into SedEdu.

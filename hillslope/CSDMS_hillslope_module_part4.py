@@ -20,6 +20,7 @@ x = np.arange(start=0, stop=1000, step=dx)
 z = np.zeros(x.shape)
 z[0:np.int(x.size/2)] = 100
 z_init = z
+dzdt = 0
 
 
 # limits for the sliders
@@ -46,8 +47,22 @@ ax.set_xlim(x.min(), x.max())
 
 
 # add plot elements
-theline, = plt.plot(x, z, lw=1.5, color='blue')
+def xz_to_fill(x, z):
+    """
+    this simple function provides a convenient way to calculate the polygon
+    vertices for the hillslope from the x and z vectors.
+    """
+    x_fill = np.hstack([x, np.flipud(x)])
+    z_fill = np.hstack([z, -np.ones(z.shape)])
+    return x_fill, z_fill
 
+thesky, = ax.fill(np.array([-1, -1, x.max(), x.max()]),
+                  np.array([-1, 250, 250, -1]), facecolor='aliceblue', edgecolor='none')
+# theline, = plt.plot(x, z, lw=1.5, color='green')
+x_fill, z_fill = xz_to_fill(x, z)
+thehill, = ax.fill(x_fill, z_fill, facecolor='forestgreen', edgecolor='k')
+
+thetext = ax.text(0.05, 0.05, '$dz/dt_{x=0}$' + '= {:.2f}'.format(dzdt), transform=ax.transAxes)
 
 # add slider
 widget_color = 'lightgoldenrodyellow'
@@ -125,8 +140,12 @@ while plt.fignum_exists(1):
 
     # update elevation
     z = z + dz
+    dzdt = dz[0] / dt
 
     # update the plot
-    theline.set_ydata(z)
+    # theline.set_ydata(z)
+    x_fill, z_fill = xz_to_fill(x, z)
+    thehill.set_xy(np.row_stack([x_fill, z_fill]).transpose())
+    thetext.set_text('$dz/dt_{x=0}$' + '= {:.2f}'.format(dzdt))
 
     plt.pause(0.001)

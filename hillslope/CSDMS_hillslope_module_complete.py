@@ -146,7 +146,7 @@ while plt.fignum_exists(1):
 
     # update elevation
     z = z + dz
-    dzdt = dz[0]
+    dzdt = dz[0] / dt
 
     # update plot
     # theline.set_ydata(z)
