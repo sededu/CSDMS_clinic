@@ -194,3 +194,39 @@ And finally, we need to connect the button to the function
 ```python
 btn_slide_reset.on_clicked(reset_sliders)
 ```
+
+Try and run your script, and test the reset button.
+
+Try and implement a button to reset the hillslope.
+You can see my implementation of this in the `CSDMS_hillslope_module_part3.py` file.
+
+
+## Part 4 -- dressing it up a bit
+That wraps up the mechanics of the module!
+What follows will be a few tricks on making your module a little more visually appealing.
+In my experience, these final steps in polishing the presentation really make a difference in student comprehension--it pays for your module to _look like_ the thing you are emulating.
+
+To do this, we'll add a sky background, and make the hillslope green.
+Finally, we'll add a meter for the rate of change of elevation at the crest.
+
+
+
+
+
+
+
+
+
+
+
+
+## Part 5 -- some notes
+This tutorial does not explain a few important parts of getting your module into SedEdu.
+That information can be found here:
+
+Also, this method of using a `while` loop is not _exactly_ the correct way to do things.
+The problem with this approach is that the window always demands to be "on top".
+This would be really troublesome for student trying to work through and activity on their computers at the same time.
+
+`matplotlib` provides a better way to do the same thing, but the process is a little more involved and requires a deeper comprehension of Python classes and objects. 
+I hope to write my own tutorial eventually about how to use the `funcanimation` tool (LINK HERE), but for now you can utilize `matplotlibs`'s documentation, or look at the rivers2stratigraphy activity for an example of how the tool works.

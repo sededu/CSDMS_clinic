@@ -48,10 +48,17 @@ ax.set_xlim(x.min(), x.max())
 
 # add plot elements
 def xz_to_fill(x, z):
+    """
+    this simple function provides a convenient way to calculate the polygon
+    vertices for the hillslope from the x and z vectors.
+    """
     x_fill = np.hstack([x, np.flipud(x)])
     z_fill = np.hstack([z, -np.ones(z.shape)])
     return x_fill, z_fill
 
+
+thesky, = ax.fill(np.array([-1, -1, x.max(), x.max()]),
+                  np.array([-1, 250, 250, -1]), facecolor='skyblue', edgecolor='none')
 # theline, = plt.plot(x, z, lw=1.5, color='green')
 x_fill, z_fill = xz_to_fill(x, z)
 theline, = ax.fill(x_fill, z_fill, facecolor='forestgreen', edgecolor='k')
