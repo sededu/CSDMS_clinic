@@ -4,7 +4,7 @@ This repository houses materials used at the 2019 CSDMS annual meeting, in a cli
 
 ## Getting started before the clinic
 Hi everyone, and thanks for signing up for my clinic! 
-For some of the the clinic I will demonstrate and explain how these modules work and can be used in a classroom (lecture style).
+For some of the the clinic I will demonstrate and explain how these modules work and can be used in a classroom.
 However, I really want the session to be mostly interactive, which means you will need a laptop with the proper software installed.
 We will spend the better part of the session with you coding on your laptops, creating your own module.
 
@@ -62,9 +62,10 @@ I do not suggest using Jupyter notebooks for development, because I think they w
 Further, to incorporate a module with SedEdu, your module must be a script and cannot be a Jupyter notebook.
 
 __Please do the following before coming to the clinic__
+1. Download the GitHub repository you are reading this file in: press the green "Clone or download" button, select "Download ZIP", and navigate to the download and unzip it.
 1. Go ahead and launch Spyder
 1. type `%matplotlib qt` into the terminal panel and press enter
-1. open the file `./interactive_gui_demo/interactive_gui_demo.py`
+1. open the file in the downloaded folder `./CSDMS_clinic-master/interactive_gui_demo/interactive_gui_demo.py`
 1. Press the green "run" button at the top of the screen and see that the module pops up, and is interactive.
 
 That's it, if you are good to that point, you will be ready to go at the clinic! 
@@ -75,13 +76,17 @@ NOTE: for running any of these interactive module codes in Spyder, you __must__ 
 %matplotlib qt
 ```
 
-### a little optional reading
-If you are just so excited you can't contain yourself, you can peruse an explanation of the code that you just ran, as a Jupyter notebook.
+### A little optional reading
+If you are just so excited for this clinic and you can't contain yourself, you can read an explanation of the code that you just ran, as a Jupyter notebook.
 To run a Jupyter notebook just type:
 ```bash
 jupyter notebook
 ```
-into
+into your terminal (MacOS and Linux) or the Anaconda Prompt (Windows).
+This will launch a web browser, and you can navigate to and open the notebook `./CSDMS_clinic-master/interactive_gui_demo/CSDMS_interactive_gui_demo.ipynb`.
+Once in the notebook, press "Shift+Enter" to run a cell and move down the page.
+
+We will go through this notebook (as slides) during the demonstration portion of the clinic, so you don't need to grasp everything, but reading it ahead of time may make things easier for you during the clinic.
 
 
 ## Clinic abstract
