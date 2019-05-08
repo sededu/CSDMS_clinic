@@ -1,7 +1,6 @@
 # CSDMS clinic instructions for hillslope diffusion module
 
 ## starting with the `interactive_gui_demo.py` file
-
 Let's start from the file we just stepped through, and work from there. 
 In your folder `CSDMS_clinic` is a bunch of `.py` files with names `CSDMS_hillslope_module_***.py`.
 These are all checkpoints in the progression through the steps in this document.
@@ -9,8 +8,8 @@ These are all checkpoints in the progression through the steps in this document.
 Start with `CSDMS_hillslope_module_part0.py`; this is a nearly exact copy of the `interactive_gui_demo.py` that we just stepped through.
 "Save as" your file to something similar, with your name (e.g., `moodie_CSDMS_hillslope_module.py`).
 
-## Part 1 -- the `while` loop
 
+## Part 1 -- the `while` loop
 The first thing we need to do is change the structure of the code so that the figure is updated regularly, without intervention from the user.
 We'll use a `while` loop to accomplish this. 
 If this doesn't mean anything to you, that's fine, a `while` loop is a sequence of commands the the computer is told to execute repeatedly until some condition is _no longer true_.
@@ -43,7 +42,6 @@ In this formulation, every loop we grab the value of the slider and do our calcu
 
 
 ## Part 2 -- creating a hillslope
-
 In this part, we will change our simple model of a sloping line, into a hillslope which evolves by a diffusion process.
 Change the name of the parameters to keep with the diffusion equation and a hillslope.
 
@@ -79,7 +77,6 @@ Update the plotting command so that we are plotting `z` instead of `y`.
 Update the slider to the appropriate "label", initial value, and limits we defined as parameters.
 
 ### the only science we're going to do today
-
 Now we need to add the only small bit of science we're going to do today to the module.
 We're going to simulate hillslope evolution with a diffusion-like process, where the elevation-slope is the driving gradient.
 
@@ -121,13 +118,12 @@ We can (and will) continue to add features to the module, but this hopefully giv
 
 
 ## Part 3 -- adding buttons and sliders
- 
 The module we have developed thus far is nice, but we want to be able to teach students about more than just a diffusion-like morphology.
 Let's work on adding some more features. 
 
 __At this point, I encourage you to explore developing on your own; what feature would you like to see implemented?__
 
-I will walk through how to add two "reset" buttons now, and how to add additional sliders. I will set up my sliders to control the elevation change at the boundaries, but you could make your do anything else instead.
+I will walk through how to add two "reset" buttons now, and how to add additional sliders. I will set up my sliders to control the elevation change at the boundaries, but you could make your slider do anything you want.
 
 ### adding sliders
 First, let's make some space to add more sliders and some buttons.
@@ -169,7 +165,6 @@ How would you prevent the elevation from going below 0?
 You can see how I implemented this in `CSDMS_hillslope_module_part3.py`, but try it on your own!
 
 ### adding reset buttons
-
 The process for creating a button is _very_ similar to the process we used to connect a slider in the previous tutorial with the sloping line.
 Let's first make a button that resets the sliders to their initial values.
 This uses the `Button` class from `matplotlib`:
@@ -209,6 +204,7 @@ In my experience, these final steps in polishing the presentation really make a 
 To do this, we'll add a sky background and make the hillslope green.
 Finally, we'll add a display for the rate of change of elevation at the crest.
 
+### filling space with polygons
 A helpful tool in these modules is to use polygons, rather than just lines. 
 It's pretty easy to convert a line into a polygon, using the line as the "boundary" of the polygon, and the other points being "off screen".
 `matplotlib` provides a plotting method called `fill()`; the man-page for `fill` tells us to provide input data as `fill(x, y, **kwargs)`, where `x` and `y` are lists of points to be used to bound the polygon.
@@ -241,6 +237,20 @@ You can see my implementation in the `CSDMS_hillslope_module_part4.py` file.
 Another step you can take is to wrap the conversion of the `x` and `z` vectors into a function.
 If the function is declared early in the script, then you can use it to make the initial plot, and update the plot.
 You can see my implementation in the `CSDMS_hillslope_module_part4.py` file.
+
+### adding a text label and updating it
+Another tool `matplotlib` provides us for plotting is a `text()` method. 
+This method creates an _instance_ of the `Text` class, and adds it into our plot.
+The syntax is pretty similar to creating a line, where we pass the `x` and `y` coordinates of the text, and in this case we include the string we want to print.
+```python
+thetext = ax.text(0.05, 0.05, '$dz/dt_{x=0}$' + '= {:.2f}'.format(dzdt), transform=ax.transAxes)
+```
+This will concatenate the string `'$dz/dt_{x=0}$'` with a string with a number (`dzdt`) formatted to have two decimal places ([see this guide on formatting Python strings](https://mkaz.blog/code/python-string-format-cookbook/)).
+
+Now we simply need to update the value of `dzdt` in our loop, and then update the text in the string.
+Hint: there is a method of `Text` that is similar to the methods of `Line2D` and `Polygon` for _setting_ the information in the text field.
+See if you can find the name of the method in the `matplotlib` documentation. 
+You can find my implementation in the 
 
 
 ## Part 5 -- some notes
