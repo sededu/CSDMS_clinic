@@ -70,4 +70,4 @@ slide.on_changed(update)
 
 
 # show the results
-plt.ion()
+plt.show()
