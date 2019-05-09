@@ -45,7 +45,7 @@ conda install numpy scipy matplotlib shapely
 ```
 Type "y" and hit "Enter" when prompted.
 
-_Note:_ if you wish to use `pip` instead, that should be fine. You can `pip install rivers2stratigraphy`.
+_Note:_ if you wish to use `pip` instead, that should be fine too. You can `pip install numpy scipy matplotlib shapely`.
 
 
 ### Testing the installation and modules
@@ -83,10 +83,13 @@ To run a Jupyter notebook just type:
 jupyter notebook
 ```
 into your terminal (MacOS and Linux) or the Anaconda Prompt (Windows).
-This will launch a web browser, and you can navigate to and open the notebook `./CSDMS_clinic-master/interactive_gui_demo/CSDMS_interactive_gui_demo.ipynb`.
+This will launch a web browser, and you can navigate to and open the notebook (in the folder you downloaded, `./CSDMS_clinic-master/interactive_gui_demo/CSDMS_interactive_gui_demo.ipynb`).
 Once in the notebook, press "Shift+Enter" to run a cell and move down the page.
 
-We will go through this notebook (as slides) during the demonstration portion of the clinic, so you don't need to grasp everything, but reading it ahead of time may make things easier for you during the clinic.
+You can also just _read_ the materials [online here](https://github.com/sededu/CSDMS_clinic/blob/master/interactive_gui_demo/CSDMS_interactive_gui_demo.ipynb), but you won't be able to interact with the plot.
+Finally, if you know how to use Google's Colaboratory, you can upload the notebook there and run through it, without having to install any software at all.
+
+__We will go through this notebook during the demonstration portion of the clinic, so you don't need to grasp everything__, but reading it ahead of time may make things easier for you during the clinic.
 
 
 ## Clinic abstract
