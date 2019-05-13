@@ -33,11 +33,11 @@ fig.subplots_adjust(left=0.15, bottom=0.3, top=0.95, right=0.9) # where do we wa
 fig.canvas.set_window_title('demo') # title of the figure window
 ax.set_xlabel("x") # the axis xlabel
 ax.set_ylabel("y") # the axis ylabel
-plt.ylim(-1, 31) # the axis y limits
+ax.set_ylim(-1, 31) # the axis y limits
 
 
 # add plot elements
-theline, = plt.plot(x, y, lw=1.5, color='blue')
+theline, = ax.plot(x, y, lw=1.5, color='blue')
 
 
 # add slider
