@@ -254,12 +254,23 @@ You can find my implementation in the
 
 
 ## Part 5 -- some notes
-This tutorial does not explain a few important parts of getting your module into SedEdu.
+### Including the module in SedEdu
+This clinic does not explain a few important parts of getting your module into SedEdu.
 That information can be found here:
 
+1. [complete instructions for contributing a module](https://github.com/sededu/sededu/blob/develop/docs/contributing_module.md)
+1. [writing the `about.json` file](https://github.com/sededu/sededu/blob/develop/docs/writing_aboutjson.md)
+1. [another example module to have a look at](https://github.com/sededu/example-module_sededu)
+
+
+### `while` loop vs `funcanimation`
 Also, this method of using a `while` loop is not _exactly_ the correct way to do things.
-The problem with this approach is that the window always demands to be "on top".
+The problem with this approach is that the window always demands to be "on top" of the user's screen.
 This would be really troublesome for student trying to work through and activity on their computers at the same time.
 
 `matplotlib` provides a better way to do the same thing, but the process is a little more involved and requires a deeper comprehension of Python classes and objects. 
-I hope to write my own tutorial eventually about how to use the `funcanimation` tool (LINK HERE), but for now you can utilize `matplotlibs`'s documentation, or look at the rivers2stratigraphy activity for an example of how the tool works.
+I hope to write my own tutorial eventually about how to use the [`funcanimation` tool](https://matplotlib.org/api/_as_gen/matplotlib.animation.FuncAnimation.html), but for now you can utilize `matplotlibs`'s documentation.
+
+I have implemented the hillslope module developed herein to use `funcanimation` too, for a demonstration. You can see that implementation in your folder as 
+`CSDMS_hillslope_module_funcanimation.py`.
+You can also look at the [rivers2stratigraphy activity](https://github.com/sededu/rivers2stratigraphy) for an example of how the tool works.
