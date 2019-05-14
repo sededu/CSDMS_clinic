@@ -93,8 +93,8 @@ and then we will swap out the computation for our 1-sided diffusion-like process
 rise = z[0:-1] - z[1:]
 run = x[1:] - x[:-1]
 slope = rise / run
-q = slope * -D # q is some dimensionless sediment flux, based just on slope and diffusivity    
-sedflux_out[0:-1] = -q * dt
+q = slope * D # q is some dimensionless sediment flux, based just on slope and diffusivity    
+sedflux_out[0:-1] = q * dt
 
 # compute the sed flux into each cell
 sedflux_in[0] = 0
@@ -112,6 +112,12 @@ z = z + dz
 # update the plot
 theline.set_ydata(z)
 ```
+
+This set of computations is hopefully pretty straightforward. 
+The steps are to calculate a slope, and determine the sediment flux _out of_ each cell based on the slope and diffusivity value.
+The flux out of each cell is the flux _in to_ the next cell down the slope.
+We use boundary conditions to close out the sediment flux calculation at every grid node.
+The difference in flux in and flux out is the 
 
 That's the bulk of the change to make this an interactive geomorphology / sedimentology activity. 
 We can (and will) continue to add features to the module, but this hopefully gives you a sense of how things work.
