@@ -121,7 +121,7 @@ class Hill(object):
         self.D = self.slide_D.val
 
         # calculate slope and sediment flux
-        rise = self.z[0:-1] - self.z[1:]
+        rise = self.z[:-1] - self.z[1:]
         run = self.x[1:] - self.x[:-1]
         slope = rise / run
         q = slope * self.D # q is some dimensionless sediment flux, based just on slope and diffusivity    

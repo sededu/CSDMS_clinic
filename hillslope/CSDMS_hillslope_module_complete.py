@@ -122,7 +122,7 @@ while plt.fignum_exists(1):
     D = slide_D.val
 
     # calculate slope and sediment flux
-    rise = z[0:-1] - z[1:]
+    rise = z[:-1] - z[1:]
     run = x[1:] - x[:-1]
     slope = rise / run
     q = slope * D # q is some dimensionless sediment flux, based just on slope and diffusivity    

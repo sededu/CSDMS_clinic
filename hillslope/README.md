@@ -90,7 +90,7 @@ and then we will swap out the computation for our 1-sided diffusion-like process
 
 ```python
 # calculate slope and sediment flux
-rise = z[0:-1] - z[1:]
+rise = z[:-1] - z[1:]
 run = x[1:] - x[:-1]
 slope = rise / run
 q = slope * D # q is some dimensionless sediment flux, based just on slope and diffusivity    
@@ -117,7 +117,7 @@ This set of computations is hopefully pretty straightforward.
 The steps are to calculate a slope, and determine the sediment flux _out of_ each cell based on the slope and diffusivity value.
 The flux out of each cell is the flux _in to_ the next cell down the slope.
 We use boundary conditions to close out the sediment flux calculation at every grid node.
-The difference in flux in and flux out is the 
+The difference between flux-in and flux-out is the change in sediment in that cell per-unit-time, and this change in mass drives aggradation or erosion of the hillslope at that cell.
 
 That's the bulk of the change to make this an interactive geomorphology / sedimentology activity. 
 We can (and will) continue to add features to the module, but this hopefully gives you a sense of how things work.
