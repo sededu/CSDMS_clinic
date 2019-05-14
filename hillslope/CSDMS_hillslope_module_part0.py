@@ -32,7 +32,7 @@ plt.ylim(-1, 31) # the axis y limits
 
 
 # add plot elements
-theline, = plt.plot(x, y, lw=1.5, color='blue')
+theline, = ax.plot(x, y, lw=1.5, color='blue')
 
 
 # add slider

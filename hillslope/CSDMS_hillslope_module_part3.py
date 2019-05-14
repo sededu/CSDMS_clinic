@@ -46,7 +46,7 @@ ax.set_xlim(x.min(), x.max())
 
 
 # add plot elements
-theline, = plt.plot(x, z, lw=1.5, color='blue')
+theline, = ax.plot(x, z, lw=1.5, color='blue')
 
 
 # add slider
