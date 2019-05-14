@@ -21,6 +21,7 @@ __All the materials will be made available online__, so you can access them late
 ## Installing Python and running the modules
 
 The development of these modules depends on Python 3, `tkinter`, and the Python packages `numpy`, `scipy`, `matplotlib`, and `shapely`. 
+If you have Python, and these packages, you can skip below to ["Testing the installation and modules"](https://github.com/sededu/CSDMS_clinic#testing-the-installation-and-modules).
 
 ### Installing Python 3
 
