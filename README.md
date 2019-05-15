@@ -65,14 +65,14 @@ Further, to incorporate a module with SedEdu, your module must be a script file 
 __Please do the following before coming to the clinic__
 1. Download the GitHub repository you are reading this file in: press the green "Clone or download" button, select "Download ZIP", and navigate to the download and unzip it.
 1. Go ahead and launch Spyder (or your text editor)
-1. type `%matplotlib qt` into the terminal panel and press enter
-1. open the file in the downloaded folder `./CSDMS_clinic-master/interactive_gui_demo/interactive_gui_demo.py`
+1. type `%matplotlib qt` into the "console" panel in Spyder (lower right corner) and press enter.
+1. Using "file>open" in Spyder, open the file in the downloaded folder `./CSDMS_clinic-master/interactive_gui_demo/interactive_gui_demo.py`. 
 1. Press the green "run" button at the top of the Spyder window and see that the module pops up, and is interactive. If using a terminal, you will run the command `python <path-to-downloads>/CSDMS_clinic-master/interactive_gui_demo/interactive_gui_demo.py`.
 
 That's it, if you are successful to that point, you will be ready to go at the clinic! 
 If you are having trouble, please email me (amoodie@rice.edu) and we will get it sorted out before the clinic. 
 
-NOTE: for running any of these interactive module codes in Spyder, you __must__ run the following line as the first thing after you open the Spyder window
+NOTE: for running any of these interactive module codes in Spyder, you __must__ run the following line as the first thing after you open the Spyder window:
 ```python
 %matplotlib qt
 ```
