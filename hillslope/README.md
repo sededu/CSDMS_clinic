@@ -126,6 +126,7 @@ Put the following lines _before_ the `while` loop to preallocate:
 sedflux_in = np.empty(x.shape, dtype=float)
 sedflux_out = np.empty(x.shape, dtype=float)
 ```
+Finally, make sure you have retained the `plt.pause(0.001)` line in the `while` loop, otherwise your plot will not display!
 
 That's the bulk of the change to make this an interactive geomorphology / sedimentology activity. 
 We can (and will) continue to add features to the module, but this hopefully gives you a sense of how things work.
