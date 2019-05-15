@@ -173,7 +173,7 @@ U_max = 0.4
 U_min = 0
 ```
 
-Try and add a slider which controls the downcutting rate at the downstream end. 
+Try and add a slider which controls the downcutting rate at the downstream end (I've called this slider `slide_C` in my code).
 How would you prevent the elevation from going below 0?
 
 You can see how I implemented this in `CSDMS_hillslope_module_part3.py`, but try it on your own!
