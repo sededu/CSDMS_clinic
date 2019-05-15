@@ -119,6 +119,14 @@ The flux out of each cell is the flux _in to_ the next cell down the slope.
 We use boundary conditions to close out the sediment flux calculation at every grid node.
 The difference between flux-in and flux-out is the change in sediment in that cell per-unit-time, and this change in mass drives aggradation or erosion of the hillslope at that cell.
 
+One more important step is to preallocate the vectors for `sedflux_in` and `sedflux_out`, because these vectors will remain the same shape, but have elements change on every loop.
+Put the following lines _before_ the `while` loop to preallocate:
+```python
+# preallocate vectors for consistency in size
+sedflux_in = np.empty(x.shape, dtype=float)
+sedflux_out = np.empty(x.shape, dtype=float)
+```
+
 That's the bulk of the change to make this an interactive geomorphology / sedimentology activity. 
 We can (and will) continue to add features to the module, but this hopefully gives you a sense of how things work.
 
