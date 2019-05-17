@@ -1,0 +1,16 @@
+{
+    "title": "Hillslope creep simulation",
+    "author": "Andrew J. Moodie and CSDMS clinic participants",
+    "version": "0.1.1",
+    "shortdesc": "Simulation of hillslope creep process",
+    "difficulty": 5,
+    "license": "MIT",
+    "projurl": "[hosted on GitHub](https://github.com/sededu/hillslope_creep)",
+    "projreadme": ["README.md"],
+    "preview": ["private", "hillslope_creep_demo.png"],
+    "exec": ["run_hillslope_creep.py"],
+    // "docloc": ["docs"],
+    // "doclist": {
+    // 	"blankdoc.txt": "A blank textfile"
+    // }
+}
