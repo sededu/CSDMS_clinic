@@ -95,7 +95,7 @@ Finally, if you know how to use Google's Colaboratory, you can upload the notebo
 
 ## Getting started at the clinic
 
-You can [access the slides I will present here](https://docs.google.com/presentation/d/1ounoTjCkVZgBxgOY3B18RYIEXiHBakLW9GRvz37a7Gk/edit?usp=sharing) or [as a pdf here]().
+You can [access the slides I will present here](https://docs.google.com/presentation/d/1ounoTjCkVZgBxgOY3B18RYIEXiHBakLW9GRvz37a7Gk/edit?usp=sharing) or [as a pdf here](https://github.com/sededu/CSDMS_clinic/blob/master/CSDMS19_Interactive_Modules_Clinic_slides.pdf).
 
 _Please download a fresh copy of this repository to use in the clinic._ 
 I recommend you to delete the older folder from your "downloads" folder before downloading the new one.
