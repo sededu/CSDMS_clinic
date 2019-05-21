@@ -93,6 +93,16 @@ You can also just _read_ the materials [online here](https://github.com/sededu/C
 Finally, if you know how to use Google's Colaboratory, you can upload the notebook there and run through it, without having to install any software at all.
 
 
+## Getting started at the clinic
+
+You can [access the slides I will present here](https://docs.google.com/presentation/d/1ounoTjCkVZgBxgOY3B18RYIEXiHBakLW9GRvz37a7Gk/edit?usp=sharing) or [as a pdf here]().
+
+_Please download a fresh copy of this repository to use in the clinic._ 
+I recommend you to delete the older folder from your "downloads" folder before downloading the new one.
+Be sure to unzip the folder.
+
+
+
 ## Clinic abstract (for your reference)
 
 In this clinic, we will first demonstrate existing interactive computer-based activities used for teaching concepts in sedimentology and stratigraphy.
